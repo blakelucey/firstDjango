@@ -1,5 +1,8 @@
 #mysite/settings.py: Settings/configuration for this Django project. Django settings will tell you all about how settings work.
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 """
 Django settings for firstDjango project.
@@ -23,7 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$2$ovht6uwz&4^p@5uq1wkrw%bj02d2v#r6&gbn9+fsp-b3!=6'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'DEFAULT_KEY')
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True) )
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
